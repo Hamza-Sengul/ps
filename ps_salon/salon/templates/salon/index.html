@@ -6,768 +6,336 @@
   <meta name="viewport" content="width=device-width, initial-scale=1">
   <title>PS Salon Yönetimi</title>
 
-  <!-- Google Fonts -->
-  <link href="https://fonts.googleapis.com/css2?family=Orbitron:wght@400;500;700;900&family=Rajdhani:wght@300;400;500;600;700&display=swap" rel="stylesheet">
-  <!-- FontAwesome -->
+  <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600;700;800&display=swap" rel="stylesheet">
   <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css"/>
-  <!-- jQuery -->
+
   <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
 
   <style>
     :root {
-      --primary-gradient: linear-gradient(135deg, #0099ff 0%, #00ff88 100%);
-      --secondary-gradient: linear-gradient(135deg, #ff6b6b 0%, #4ecdc4 100%);
-      --success-gradient: linear-gradient(135deg, #00ff88 0%, #00b8ff 100%);
-      --warning-gradient: linear-gradient(135deg, #ffd700 0%, #ff8c00 100%);
-      --danger-gradient: linear-gradient(135deg, #ff4757 0%, #ff3838 100%);
-      --gaming-gradient: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
-      --neon-blue: #00e5ff;
-      --neon-green: #00ff88;
-      --neon-purple: #bf5af2;
-      --neon-orange: #ff6b35;
-      --bg-primary: #0a0a0f;
+      --bg-primary: #0f0f23;
       --bg-secondary: #1a1a2e;
-      --bg-tertiary: #16213e;
-      --card-bg: rgba(255, 255, 255, 0.05);
-      --card-active: linear-gradient(135deg, rgba(0, 229, 255, 0.2) 0%, rgba(0, 255, 136, 0.2) 100%);
-      --card-empty: linear-gradient(135deg, rgba(102, 126, 234, 0.1) 0%, rgba(118, 75, 162, 0.1) 100%);
-      --text-primary: #ffffff;
-      --text-secondary: #b8b8d4;
-      --text-accent: #00e5ff;
-      --text-success: #00ff88;
-      --text-warning: #ffd700;
-      --text-danger: #ff4757;
-      --shadow-neon: 0 0 20px rgba(0, 229, 255, 0.3);
-      --shadow-success: 0 0 20px rgba(0, 255, 136, 0.3);
-      --shadow-danger: 0 0 20px rgba(255, 71, 87, 0.3);
-      --border-radius: 16px;
-      --border-radius-sm: 8px;
+      --card-empty: linear-gradient(135deg, #fc466b 0%, #3f5efb 100%);
+      --card-active: linear-gradient(135deg, #00c9ff 0%, #92fe9d 100%);
+      --danger-gradient: linear-gradient(135deg, #ff0844 0%, #ffb199 100%);
+      --vip-border: 4px solid gold;
+      --text-primary: #fff;
+      --text-secondary: #b8b8b8;
+      --text-accent: #00f2fe;
+      --border-color: rgba(255, 255, 255, 0.1);
+      --border-radius: 20px;
+      --border-radius-sm: 12px;
+      --shadow-light: 0 8px 32px rgba(0, 0, 0, 0.3);
+      --shadow-heavy: 0 20px 60px rgba(0, 0, 0, 0.4);
     }
-
-    * { 
-      box-sizing: border-box; 
-      margin: 0; 
-      padding: 0; 
-    }
-
+    * { box-sizing: border-box; margin: 0; padding: 0; }
     body {
-      font-family: 'Rajdhani', sans-serif;
+      font-family: 'Poppins', sans-serif;
       background: var(--bg-primary);
-      background-image: 
-        radial-gradient(circle at 20% 50%, rgba(0, 229, 255, 0.1) 0%, transparent 50%),
-        radial-gradient(circle at 80% 20%, rgba(0, 255, 136, 0.1) 0%, transparent 50%),
-        radial-gradient(circle at 40% 80%, rgba(191, 90, 242, 0.1) 0%, transparent 50%);
       color: var(--text-primary);
       min-height: 100vh;
       overflow-x: hidden;
-      position: relative;
     }
-
-    /* Animated background particles */
-    body::before {
-      content: '';
-      position: fixed;
-      top: 0;
-      left: 0;
-      width: 100%;
-      height: 100%;
-      background-image: 
-        radial-gradient(2px 2px at 20px 30px, rgba(255, 255, 255, 0.1), transparent),
-        radial-gradient(2px 2px at 40px 70px, rgba(0, 229, 255, 0.2), transparent),
-        radial-gradient(1px 1px at 90px 40px, rgba(0, 255, 136, 0.1), transparent),
-        radial-gradient(1px 1px at 130px 80px, rgba(191, 90, 242, 0.1), transparent);
-      background-repeat: repeat;
-      background-size: 150px 100px;
-      animation: particle-float 20s linear infinite;
-      pointer-events: none;
-      z-index: -1;
-    }
-
-    @keyframes particle-float {
-      0% { transform: translateY(0px); }
-      100% { transform: translateY(-100px); }
-    }
-
     header {
       text-align: center;
-      padding: 3rem 1rem 2rem;
-      position: relative;
-      overflow: hidden;
+      padding: 2rem 1rem;
     }
-
-    header::before {
-      content: '';
-      position: absolute;
-      top: 0;
-      left: -50%;
-      width: 200%;
-      height: 100%;
-      background: linear-gradient(45deg, transparent, rgba(0, 229, 255, 0.1), transparent);
-      animation: header-shine 4s ease-in-out infinite;
-    }
-
-    @keyframes header-shine {
-      0%, 100% { transform: translateX(-100%); }
-      50% { transform: translateX(100%); }
-    }
-
     header h1 {
-      font-family: 'Orbitron', monospace;
-      font-size: 3.5rem;
-      font-weight: 900;
-      background: var(--primary-gradient);
+      font-size: 3rem;
+      font-weight: 800;
+      background: var(--text-accent);
       -webkit-background-clip: text;
       -webkit-text-fill-color: transparent;
-      background-clip: text;
-      margin-bottom: 0.5rem;
-      text-shadow: 0 0 30px rgba(0, 229, 255, 0.5);
-      animation: title-glow 3s ease-in-out infinite alternate;
-      position: relative;
-      z-index: 1;
+      margin-bottom: .5rem;
     }
-
-    @keyframes title-glow {
-      0% { filter: drop-shadow(0 0 5px rgba(0, 229, 255, 0.5)); }
-      100% { filter: drop-shadow(0 0 20px rgba(0, 229, 255, 0.8)); }
-    }
-
     header p {
       color: var(--text-secondary);
-      font-weight: 400;
-      font-size: 1.1rem;
-      position: relative;
-      z-index: 1;
+      font-weight: 300;
     }
-
     #view-logs-btn {
-      margin: 1.5rem auto;
+      margin: 1rem auto;
       display: block;
-      padding: 1rem 2rem;
-      background: var(--success-gradient);
+      padding: .75rem 1.5rem;
+      background: var(--text-accent);
       border: none;
-      border-radius: var(--border-radius);
+      border-radius: 12px;
       font-weight: 600;
-      font-size: 1rem;
-      color: var(--bg-primary);
+      color: #000;
       cursor: pointer;
-      transition: all 0.3s ease;
-      box-shadow: var(--shadow-success);
-      position: relative;
-      overflow: hidden;
-      text-transform: uppercase;
-      letter-spacing: 1px;
+      transition: all .3s ease;
     }
-
-    #view-logs-btn::before {
-      content: '';
-      position: absolute;
-      top: 0;
-      left: -100%;
-      width: 100%;
-      height: 100%;
-      background: linear-gradient(90deg, transparent, rgba(255, 255, 255, 0.3), transparent);
-      transition: left 0.5s;
-    }
-
     #view-logs-btn:hover {
-      transform: translateY(-2px);
-      box-shadow: 0 0 30px rgba(0, 255, 136, 0.6);
+        transform: translateY(-3px);
+        box-shadow: 0 10px 20px rgba(0, 242, 254, 0.2);
     }
-
-    #view-logs-btn:hover::before {
-      left: 100%;
-    }
-
     .guide {
-      max-width: 1000px;
-      margin: 2rem auto;
-      background: rgba(255, 255, 255, 0.03);
-      backdrop-filter: blur(20px);
-      border: 1px solid rgba(0, 229, 255, 0.2);
+      max-width: 900px;
+      margin: 1.5rem auto;
+      background: rgba(255, 255, 255, 0.05);
+      backdrop-filter: blur(10px);
       border-radius: var(--border-radius);
-      padding: 2rem;
-      box-shadow: 0 8px 40px rgba(0, 0, 0, 0.3);
-      position: relative;
-      overflow: hidden;
+      padding: 1.5rem;
+      box-shadow: var(--shadow-light);
     }
-
-    .guide::before {
-      content: '';
-      position: absolute;
-      top: 0;
-      left: 0;
-      right: 0;
-      height: 2px;
-      background: var(--primary-gradient);
-    }
-
     .guide-content {
       display: grid;
-      grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
-      gap: 1.5rem;
+      grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+      gap: 1rem;
     }
-
     .guide-item {
       display: flex;
       align-items: center;
       gap: 1rem;
       background: rgba(255, 255, 255, 0.05);
-      padding: 1.5rem;
+      padding: 1rem;
       border-radius: var(--border-radius-sm);
-      border: 1px solid rgba(0, 229, 255, 0.1);
-      transition: all 0.3s ease;
-      position: relative;
-      overflow: hidden;
     }
-
-    .guide-item::before {
-      content: '';
-      position: absolute;
-      top: 0;
-      left: -100%;
-      width: 100%;
-      height: 100%;
-      background: linear-gradient(90deg, transparent, rgba(0, 229, 255, 0.1), transparent);
-      transition: left 0.5s;
-    }
-
-    .guide-item:hover {
-      border-color: var(--neon-blue);
-      box-shadow: var(--shadow-neon);
-      transform: translateY(-2px);
-    }
-
-    .guide-item:hover::before {
-      left: 100%;
-    }
-
-    .guide-item .icon {
-      font-size: 2rem;
-      color: var(--text-accent);
-      animation: icon-pulse 2s ease-in-out infinite;
-    }
-
-    @keyframes icon-pulse {
-      0%, 100% { transform: scale(1); }
-      50% { transform: scale(1.1); }
-    }
-
-    .guide-item strong {
-      color: var(--text-accent);
-      font-size: 1.1rem;
-    }
+    .guide-item .icon { font-size: 1.5rem; color: var(--text-accent); }
+    .guide-item strong { color: var(--text-accent); }
 
     #tables-container {
       display: grid;
       grid-template-columns: repeat(auto-fit, minmax(220px, 1fr));
-      gap: 2rem;
+      gap: 1.5rem;
       padding: 2rem;
       max-width: 1400px;
       margin: 0 auto 3rem;
     }
-
     .table-square {
       position: relative;
       background: var(--card-empty);
-      border: 2px solid rgba(102, 126, 234, 0.3);
       border-radius: var(--border-radius);
       padding: 1.5rem;
       cursor: pointer;
-      transition: all 0.4s cubic-bezier(0.25, 0.46, 0.45, 0.94);
+      transition: transform .3s ease, box-shadow .3s ease;
+      box-shadow: var(--shadow-light);
       display: flex;
       flex-direction: column;
       justify-content: space-between;
-      min-height: 200px;
-      backdrop-filter: blur(10px);
-      overflow: hidden;
+      min-height: 180px;
     }
-
-    .table-square::before {
-      content: '';
-      position: absolute;
-      top: 0;
-      left: 0;
-      right: 0;
-      bottom: 0;
-      background: linear-gradient(135deg, transparent, rgba(255, 255, 255, 0.05), transparent);
-      opacity: 0;
-      transition: opacity 0.3s ease;
-    }
-
-    .table-square:hover::before {
-      opacity: 1;
-    }
-
+    .table-square.vip { border: var(--vip-border); }
     .table-square.active {
       background: var(--card-active);
-      border-color: var(--neon-green);
-      box-shadow: 
-        0 0 30px rgba(0, 255, 136, 0.4),
-        inset 0 0 20px rgba(0, 255, 136, 0.1);
-      animation: active-pulse 3s ease-in-out infinite;
+      box-shadow: var(--shadow-heavy), 0 0 40px rgba(0, 201, 255, 0.4);
     }
-
-    @keyframes active-pulse {
-      0%, 100% { 
-        box-shadow: 
-          0 0 30px rgba(0, 255, 136, 0.4),
-          inset 0 0 20px rgba(0, 255, 136, 0.1);
-      }
-      50% { 
-        box-shadow: 
-          0 0 40px rgba(0, 255, 136, 0.6),
-          inset 0 0 30px rgba(0, 255, 136, 0.2);
-      }
-    }
-
     .table-square:hover {
-      transform: translateY(-8px) scale(1.02);
-      box-shadow: 0 15px 40px rgba(0, 0, 0, 0.4);
+      transform: translateY(-8px);
+      box-shadow: var(--shadow-heavy);
     }
-
-    .table-square.active:hover {
-      box-shadow: 
-        0 15px 40px rgba(0, 0, 0, 0.4),
-        0 0 50px rgba(0, 255, 136, 0.6);
-    }
-
     .table-square .dot {
-      position: absolute;
-      top: 15px;
-      right: 15px;
-      width: 18px;
-      height: 18px;
-      background: var(--text-danger);
-      border-radius: 50%;
-      box-shadow: 
-        0 0 20px rgba(255, 71, 87, 0.6),
-        inset 0 0 5px rgba(255, 255, 255, 0.3);
+      position: absolute; top: 15px; right: 15px;
+      width: 16px; height: 16px;
+      background: #ff4757; border-radius: 50%;
+      box-shadow: 0 0 20px rgba(255, 71, 87, 0.6);
       animation: dot-pulse 2s ease-in-out infinite;
     }
-
     .table-square .dot.inactive {
-      background: rgba(255, 255, 255, 0.3);
-      box-shadow: inset 0 0 5px rgba(0, 0, 0, 0.3);
-      animation: none;
+      background: rgba(255, 255, 255, 0.4);
+      box-shadow: none; animation: none;
     }
-
     @keyframes dot-pulse {
-      0%, 100% { 
-        transform: scale(1);
-        box-shadow: 
-          0 0 20px rgba(255, 71, 87, 0.6),
-          inset 0 0 5px rgba(255, 255, 255, 0.3);
-      }
-      50% { 
-        transform: scale(1.2);
-        box-shadow: 
-          0 0 30px rgba(255, 71, 87, 0.8),
-          inset 0 0 8px rgba(255, 255, 255, 0.5);
-      }
+      0%, 100% { transform: scale(1); }
+      50% { transform: scale(1.1); }
     }
-
     .table-square .subtitle {
-      position: absolute;
-      top: 15px;
-      left: 15px;
-      background: rgba(0, 0, 0, 0.6);
-      border: 1px solid var(--neon-blue);
-      padding: 0.3rem 1rem;
+      position: absolute; top: 15px; left: 15px;
+      background: rgba(0, 0, 0, 0.3);
+      padding: .3rem .8rem;
       border-radius: 20px;
-      font-size: 0.8rem;
-      font-weight: 600;
-      color: var(--text-accent);
-      text-transform: uppercase;
-      letter-spacing: 1px;
-      box-shadow: 0 0 10px rgba(0, 229, 255, 0.3);
+      font-size: .75rem;
+      font-weight: 500;
     }
-
     .table-square .title {
-      font-family: 'Orbitron', monospace;
-      font-size: 1.8rem;
-      font-weight: 700;
-      margin: 2.5rem 0 1rem;
-      color: var(--text-primary);
-      text-shadow: 0 0 10px rgba(255, 255, 255, 0.3);
-    }
-
-    .table-square.active .title {
-      color: var(--text-success);
-      text-shadow: 0 0 15px rgba(0, 255, 136, 0.5);
-    }
-
-    .table-square .timer {
-      font-family: 'Orbitron', monospace;
-      font-size: 1.4rem;
-      font-weight: 600;
-      color: var(--text-accent);
-      text-shadow: 0 0 10px rgba(0, 229, 255, 0.5);
-      margin-bottom: 0.5rem;
-    }
-
-    .table-square.active .timer {
-      animation: timer-glow 2s ease-in-out infinite;
-    }
-
-    @keyframes timer-glow {
-      0%, 100% { text-shadow: 0 0 10px rgba(0, 229, 255, 0.5); }
-      50% { text-shadow: 0 0 20px rgba(0, 229, 255, 0.8); }
-    }
-
-    .table-square .total {
-      font-family: 'Orbitron', monospace;
       font-size: 1.6rem;
       font-weight: 700;
-      color: var(--text-warning);
-      text-shadow: 0 0 10px rgba(255, 215, 0, 0.5);
+      margin: 2rem 0 1rem;
     }
-
-    .table-square.active .total {
-      animation: total-glow 3s ease-in-out infinite;
+    .table-square .timer {
+      font-family: monospace;
+      font-size: 1.2rem;
+      font-weight: 600;
     }
-
-    @keyframes total-glow {
-      0%, 100% { 
-        color: var(--text-warning);
-        text-shadow: 0 0 10px rgba(255, 215, 0, 0.5);
-      }
-      50% { 
-        color: var(--neon-orange);
-        text-shadow: 0 0 20px rgba(255, 107, 53, 0.8);
-      }
+    .table-square .total {
+      font-size: 1.4rem;
+      font-weight: 700;
     }
-
     .hidden-items {
       display: none;
-      margin-top: 0.5rem;
-      font-size: 0.95rem;
-      color: var(--text-secondary);
     }
 
-    .hidden-items li {
-      margin-bottom: 0.3rem;
-      padding: 0.2rem 0.5rem;
-      background: rgba(255, 255, 255, 0.05);
-      border-radius: 4px;
-      border-left: 3px solid var(--neon-blue);
-    }
-
-    /* Modal Styles */
+    /* Modal */
     #modal-overlay {
       display: none;
       position: fixed;
       inset: 0;
-      background: rgba(0, 0, 0, 0.9);
-      backdrop-filter: blur(15px);
+      background: rgba(0, 0, 0, 0.8);
+      backdrop-filter: blur(10px);
       align-items: center;
       justify-content: center;
       z-index: 1000;
-      animation: modal-fade-in 0.3s ease;
+      opacity: 0;
+      transition: opacity .3s ease-in-out;
     }
-
-    @keyframes modal-fade-in {
-      0% { opacity: 0; }
-      100% { opacity: 1; }
-    }
-
     #modal {
       background: var(--bg-secondary);
-      border: 2px solid var(--neon-blue);
       border-radius: var(--border-radius);
-      width: 450px;
-      max-width: 90%;
-      padding: 2.5rem;
+      width: 480px;
+      max-width: 95%;
+      padding: 2rem;
       color: var(--text-primary);
-      box-shadow: 
-        0 20px 60px rgba(0, 0, 0, 0.6),
-        0 0 40px rgba(0, 229, 255, 0.3);
+      box-shadow: var(--shadow-heavy);
       position: relative;
-      backdrop-filter: blur(20px);
-      animation: modal-slide-up 0.4s cubic-bezier(0.25, 0.46, 0.45, 0.94);
+      border-top: 3px solid var(--text-accent);
+      transform: scale(0.95);
+      transition: transform .3s ease-in-out;
     }
-
-    @keyframes modal-slide-up {
-      0% {
-        transform: translateY(50px);
-        opacity: 0;
-      }
-      100% {
-        transform: translateY(0);
-        opacity: 1;
-      }
-    }
-
-    #modal::before {
-      content: '';
-      position: absolute;
-      top: 0;
-      left: 0;
-      right: 0;
-      height: 3px;
-      background: var(--primary-gradient);
-      border-radius: var(--border-radius) var(--border-radius) 0 0;
-    }
-
     #modal .modal-header {
       display: flex;
       align-items: center;
-      margin-bottom: 1.5rem;
+      margin-bottom: 1rem;
     }
-
     #modal .modal-header i {
-      font-size: 2.5rem;
+      font-size: 1.8rem;
       margin-right: 1rem;
       color: var(--text-accent);
-      animation: icon-pulse 2s ease-in-out infinite;
     }
-
     #modal .modal-header h3 {
-      font-family: 'Orbitron', monospace;
-      font-size: 1.8rem;
+      font-size: 1.6rem;
       font-weight: 700;
-      color: var(--text-primary);
     }
-
     #modal .modal-subtitle {
-      font-size: 1.1rem;
-      margin-bottom: 2rem;
+      font-size: 1rem;
+      margin-bottom: 1.5rem;
       color: var(--text-secondary);
     }
-
     #modal .flash {
-      position: absolute;
-      top: 15px;
-      right: 15px;
-      background: var(--success-gradient);
-      color: var(--bg-primary);
-      padding: 0.8rem 1.2rem;
-      border-radius: var(--border-radius-sm);
+      position: absolute; top: 15px; right: 15px;
+      background: var(--text-accent);
+      color: #000;
+      padding: 8px 12px;
+      border-radius: 6px;
       display: none;
       font-weight: 600;
-      box-shadow: var(--shadow-success);
-      animation: flash-appear 0.3s ease;
+      z-index: 10;
     }
-
-    @keyframes flash-appear {
-      0% {
-        transform: translateY(-20px);
-        opacity: 0;
-      }
-      100% {
-        transform: translateY(0);
-        opacity: 1;
-      }
+    .modal-summary {
+        background: rgba(0,0,0,0.2);
+        padding: 1rem;
+        border-radius: var(--border-radius-sm);
+        margin-bottom: 1.5rem;
     }
-
+    .modal-summary .summary-item {
+        display: flex;
+        justify-content: space-between;
+        font-size: 1rem;
+        padding: 0.5rem 0;
+        color: var(--text-secondary);
+    }
+     .modal-summary .summary-item strong {
+        color: var(--text-primary);
+        font-weight: 600;
+    }
+    .modal-summary hr {
+        border: none;
+        height: 1px;
+        background-color: var(--border-color);
+        margin: 0.75rem 0;
+    }
+    .modal-summary .total-payable {
+        display: flex;
+        justify-content: space-between;
+        align-items: center;
+        font-size: 1.4rem;
+        font-weight: 700;
+        color: var(--text-accent);
+    }
     #modal .form-group {
-      margin-bottom: 2rem;
+      margin-bottom: 1.5rem;
     }
-
     #modal .form-group label {
       display: block;
       font-weight: 600;
-      margin-bottom: 0.8rem;
-      color: var(--text-accent);
-      font-size: 1.1rem;
+      margin-bottom: .5rem;
     }
-
     #modal .form-group select {
       width: 100%;
-      padding: 1.2rem;
+      padding: 1rem;
       border-radius: var(--border-radius-sm);
-      border: 2px solid rgba(0, 229, 255, 0.3);
+      border: 2px solid var(--border-color);
       background: rgba(255, 255, 255, 0.05);
       color: var(--text-primary);
       font-size: 1rem;
-      transition: all 0.3s ease;
-      backdrop-filter: blur(10px);
     }
-
     #modal .form-group select:focus {
       outline: none;
-      border-color: var(--neon-blue);
-      box-shadow: 0 0 20px rgba(0, 229, 255, 0.4);
-      background: rgba(255, 255, 255, 0.1);
+      border-color: var(--text-accent);
+      box-shadow: 0 0 20px rgba(0, 242, 254, 0.3);
     }
-
     #session-items-list {
       list-style: none;
       padding-left: 0;
-      max-height: 180px;
+      max-height: 150px;
       overflow-y: auto;
-      margin-bottom: 2rem;
-      border: 1px solid rgba(0, 229, 255, 0.2);
+      margin-bottom: 1.5rem;
+      padding: 0.5rem;
+      background: rgba(0,0,0,0.2);
       border-radius: var(--border-radius-sm);
-      background: rgba(255, 255, 255, 0.02);
     }
-
-    #session-items-list::-webkit-scrollbar {
-      width: 6px;
-    }
-
-    #session-items-list::-webkit-scrollbar-track {
-      background: rgba(255, 255, 255, 0.1);
-      border-radius: 3px;
-    }
-
-    #session-items-list::-webkit-scrollbar-thumb {
-      background: var(--neon-blue);
-      border-radius: 3px;
-    }
-
     #session-items-list li {
       display: flex;
       justify-content: space-between;
-      padding: 1rem;
+      padding: .75rem 1rem;
       background: rgba(255, 255, 255, 0.05);
-      border-bottom: 1px solid rgba(0, 229, 255, 0.1);
-      transition: background 0.2s ease;
+      border-radius: var(--border-radius-sm);
+      margin-bottom: .3rem;
     }
-
-    #session-items-list li:hover {
-      background: rgba(0, 229, 255, 0.1);
-    }
-
-    #session-items-list li:last-child {
-      border-bottom: none;
-    }
-
     #modal .modal-footer {
       display: flex;
       gap: 1rem;
       flex-wrap: wrap;
     }
-
     #modal .btn {
       flex: 1;
-      min-width: 130px;
-      padding: 1.2rem 1.5rem;
+      min-width: 120px;
+      padding: 1rem 1.5rem;
       border: none;
       border-radius: var(--border-radius-sm);
-      font-size: 1rem;
       font-weight: 600;
       cursor: pointer;
       position: relative;
       overflow: hidden;
-      transition: all 0.3s ease;
-      text-transform: uppercase;
-      letter-spacing: 0.5px;
+      transition: all .3s ease;
+      font-size: 1rem;
     }
-
-    #modal .btn::before {
-      content: '';
-      position: absolute;
-      top: 0;
-      left: -100%;
-      width: 100%;
-      height: 100%;
-      background: rgba(255, 255, 255, 0.2);
-      transition: left 0.5s;
+     #modal .btn:hover {
+        transform: translateY(-3px);
+        box-shadow: var(--shadow-light);
     }
+    .btn-purple { background: var(--text-accent); color: #000; }
+    .btn-red { background: var(--danger-gradient); color: var(--text-primary); }
+    .btn-gray { background: rgba(255, 255, 255, 0.1); color: var(--text-primary); border: 2px solid var(--border-color); }
 
-    #modal .btn:hover {
-      transform: translateY(-2px);
-    }
-
-    #modal .btn:hover::before {
-      left: 100%;
-    }
-
-    .btn-purple {
-      background: var(--success-gradient);
-      color: var(--text-primary);
-      box-shadow: var(--shadow-success);
-    }
-
-    .btn-purple:hover {
-      box-shadow: 0 0 30px rgba(0, 255, 136, 0.6);
-    }
-
-    .btn-red {
-      background: var(--danger-gradient);
-      color: var(--text-primary);
-      box-shadow: var(--shadow-danger);
-    }
-
-    .btn-red:hover {
-      box-shadow: 0 0 30px rgba(255, 71, 87, 0.6);
-    }
-
-    .btn-gray {
-      background: rgba(255, 255, 255, 0.1);
-      color: var(--text-primary);
-      border: 2px solid rgba(255, 255, 255, 0.3);
-    }
-
-    .btn-gray:hover {
-      background: rgba(255, 255, 255, 0.2);
-      border-color: rgba(255, 255, 255, 0.5);
-    }
-
-    /* Responsive Design */
     @media (max-width: 768px) {
-      .table-square {
-        min-height: 160px;
-        padding: 1rem;
-      }
-      
-      header h1 {
-        font-size: 2.5rem;
-      }
-      
-      #modal {
-        width: 95%;
-        padding: 2rem;
-      }
-      
-      #modal .modal-footer {
-        flex-direction: column;
-      }
-      
-      .guide-content {
-        grid-template-columns: 1fr;
-      }
-    }
-
-    @media (max-width: 480px) {
-      #tables-container {
-        grid-template-columns: repeat(auto-fit, minmax(180px, 1fr));
-        gap: 1rem;
-        padding: 1rem;
-      }
-      
-      .table-square {
-        min-height: 140px;
-        padding: 0.8rem;
-      }
-      
-      .table-square .title {
-        font-size: 1.4rem;
-      }
-      
-      .table-square .timer {
-        font-size: 1.1rem;
-      }
-      
-      .table-square .total {
-        font-size: 1.3rem;
-      }
+      .table-square { min-height: 160px; padding: 1rem; }
+      header h1 { font-size: 2.5rem; }
+      #modal .modal-footer { flex-direction: column; }
     }
   </style>
 </head>
 <body>
 
   <header>
-    <h1>🎮 PS SALON YÖNETİMİ</h1>
-    <p>PlayStation Salonunuzu Profesyonelce Yönetin</p>
-    <button id="view-logs-btn">📊 Günlük Logları Görüntüle</button>
+    <h1>🎮 PS Salon Yönetimi</h1>
+    <p>PlayStation salonunuzu yönetin</p>
+    <button id="view-logs-btn">📑 Günlük Logları Görüntüle</button>
   </header>
 
   <div class="guide">
     <div class="guide-content">
       <div class="guide-item">
-        <i class="fas fa-mouse-pointer icon"></i>
-        <div><strong>Çift Tıklama:</strong> Masa açar ve oyuncu sayısını sorar</div>
+        <i class="fas fa-mouse icon"></i>
+        <div><strong>Çift Tıklama:</strong> Masa açar ve kol sayısını sorar</div>
       </div>
       <div class="guide-item">
         <i class="fas fa-hand-pointer icon"></i>
@@ -775,22 +343,26 @@
       </div>
       <div class="guide-item">
         <i class="fas fa-palette icon"></i>
-        <div><strong>Durum Renkleri:</strong> <span style="color: var(--neon-green);">Aktif</span> / <span style="color: var(--neon-purple);">Boş</span></div>
+        <div><strong>Renk:</strong> <span style="color:#00f2fe;">Aktif</span> / <span style="color:#fc466b;">Boş</span></div>
       </div>
     </div>
   </div>
 
   <div id="tables-container">
     {% for table in tables %}
-      <div class="table-square {% if table.is_open %}active{% endif %}"
-           id="table-{{ table.id }}"
-           data-id="{{ table.id }}"
-           data-ps="{{ table.ps_type }}"
-           data-open="{{ table.is_open|yesno:'1,0' }}"
-           data-start="{{ table.current_session_start }}"
-           data-controllers="{{ table.current_controllers|default:2 }}">
+      <div
+        class="table-square {% if table.is_open %}active{% endif %} {% if table.is_vip %}vip{% endif %}"
+        id="table-{{ table.id }}"
+        data-id="{{ table.id }}"
+        data-name="{{ table.name }}"
+        data-ps="{{ table.ps_type }}"
+        data-open="{{ table.is_open|yesno:'1,0' }}"
+        data-start="{{ table.current_session_start }}"
+        data-controllers="{{ table.current_controllers }}"
+        data-vip="{{ table.is_vip|yesno:'1,0' }}"
+      >
         <div class="dot {% if not table.is_open %}inactive{% endif %}"></div>
-        <div class="subtitle">PS{{ table.ps_type }}</div>
+        <div class="subtitle">PS{{ table.ps_type }}{% if table.is_vip %} (VIP){% endif %}</div>
         <div class="title">{{ table.name }}</div>
         <div class="timer">--:--:--</div>
         <div class="total">₺0.00</div>
@@ -805,252 +377,249 @@
     {% endfor %}
   </div>
 
-  <!-- Modal -->
   <div id="modal-overlay">
     <div id="modal">
-      <div class="modal-header">
-        <i class="fa-solid fa-gamepad"></i>
-        <h3>MASA YÖNETİMİ</h3>
-      </div>
-      <div class="modal-subtitle">Masaya ürün ekleyin veya oturumu kapatın</div>
-      <div class="flash">Ürün başarıyla eklendi!</div>
+        <div class="modal-header">
+            <i class="fa-solid fa-file-invoice-dollar"></i>
+            <h3><span id="modal-table-name"></span> - Hesap Detayları</h3>
+        </div>
+        <div class="flash">Ürün eklendi!</div>
 
-      <div class="form-group">
-        <label for="product-select">🛒 Ürün Seçimi:</label>
-        <select id="product-select">
-          {% for product in products %}
-            <option style="color: #0a0a0f;" value="{{ product.id }}"
-                    data-name="{{ product.name }}"
-                    data-price="{{ product.price }}">
-              {{ product.name }} – ₺{{ product.price }}
-            </option>
-          {% endfor %}
-        </select>
-      </div>
+        <div class="modal-summary">
+            <div class="summary-item">
+                <span>Geçen Süre:</span>
+                <strong id="modal-timer">--:--:--</strong>
+            </div>
+            <div class="summary-item">
+                <span>Oyun Ücreti:</span>
+                <strong id="modal-session-cost">₺0.00</strong>
+            </div>
+            <div class="summary-item">
+                <span>Ekstralar Toplamı:</span>
+                <strong id="modal-items-cost">₺0.00</strong>
+            </div>
+            <hr>
+            <div class="total-payable">
+                <span>ÖDENECEK TOPLAM:</span>
+                <span id="modal-total-payable">₺0.00</span>
+            </div>
+        </div>
 
-      <div class="form-group">
-        <label>🛍️ Sepet İçeriği:</label>
-        <ul id="session-items-list"></ul>
-      </div>
+        <div class="form-group">
+            <label for="product-select">Masaya Ürün Ekle:</label>
+            <select id="product-select">
+            {% for product in products %}
+                <option style="color: #000;" value="{{ product.id }}"
+                        data-name="{{ product.name }}"
+                        data-price="{{ product.price }}">
+                {{ product.name }} – ₺{{ product.price }}
+                </option>
+            {% endfor %}
+            </select>
+        </div>
 
-      <div class="modal-footer">
-        <button id="add-product-btn" class="btn btn-purple">
-          <i class="fa-solid fa-plus"></i> Ürün Ekle
-        </button>
-        <button id="close-session-btn" class="btn btn-red">
-          <i class="fa-solid fa-power-off"></i> Masayı Kapat
-        </button>
-        <button id="close-modal-btn" class="btn btn-gray">
-          <i class="fa-solid fa-xmark"></i> İptal
-        </button>
-      </div>
+        <div class="form-group">
+            <label>Sepet (Eklenen Ürünler):</label>
+            <ul id="session-items-list"></ul>
+        </div>
+
+        <div class="modal-footer">
+            <button id="add-product-btn" class="btn btn-purple">
+            <i class="fa-solid fa-plus"></i> Ürün Ekle
+            </button>
+            <button id="close-session-btn" class="btn btn-red">
+            <i class="fa-solid fa-stop"></i> Masayı Kapat
+            </button>
+            <button id="close-modal-btn" class="btn btn-gray">
+            <i class="fa-solid fa-xmark"></i> Geri Dön
+            </button>
+        </div>
     </div>
   </div>
 
   <script>
-    $(function(){
-      // CSRF Token Setup
-      function getCookie(name){
-        let v=null;
-        document.cookie.split(';').forEach(c=>{
-          let t=c.trim().split('=');
-          if(t[0]===name) v=decodeURIComponent(t[1]);
-        });
+    $(function() {
+      // CSRF setup
+      function getCookie(name) {
+        let v = null;
+        if (document.cookie && document.cookie !== '') {
+            document.cookie.split(';').forEach(c => {
+            let t = c.trim().split('=');
+            if (t[0] === name) v = decodeURIComponent(t[1]);
+          });
+        }
         return v;
       }
       $.ajaxSetup({ headers: { "X-CSRFToken": getCookie("csrftoken") } });
 
-      // Pricing rates
+      // Tarifeler
       var rates = {};
       {% for p in pricing %}
         rates[{{ p.ps_type }}] = parseFloat("{{ p.hourly_rate }}");
       {% endfor %}
 
-      function pad(n){ return n<10?"0"+n:n; }
-      function formatTime(sec){
-        let h=Math.floor(sec/3600), m=Math.floor((sec%3600)/60), s=sec%60;
-        return pad(h)+":"+pad(m)+":"+pad(s);
+      function pad(n) { return n < 10 ? "0" + n : n; }
+      function formatTime(sec) {
+        let h = Math.floor(sec / 3600),
+            m = Math.floor((sec % 3600) / 60),
+            s = Math.floor(sec % 60);
+        return pad(h) + ":" + pad(m) + ":" + pad(s);
       }
 
-      function updateTimer(id){
-        let $t = $("#table-"+id),
+      function calculateCost(tableElement) {
+        let $t = $(tableElement),
             start = new Date($t.data("start")),
-            elapsed = Math.floor((Date.now()-start)/1000),
+            elapsed = Math.floor((Date.now() - start) / 1000),
+            // Minimum 1 saat ücreti alınır
             secs = elapsed < 3600 ? 3600 : elapsed,
             ps = $t.data("ps"),
-            controllers = parseInt($t.data("controllers")),
-            extra = Math.max(controllers-2,0),
-            extraRate = ps===4?25:40,
-            rate = rates[ps] + extra*extraRate,
-            baseCost = rate*(secs/3600),
+            ctr = parseInt($t.data("controllers")),
+            extra = Math.max(ctr - 2, 0),
+            // PS4 için kol başı 25, PS5 için 40 (varsayılan)
+            extraRate = ps === 4 ? 25 : 40,
+            baseRate = rates[ps] + extra * extraRate,
+            vipMult = $t.data("vip") === 1 ? 2 : 1,
+            rate = baseRate * vipMult,
+            sessionCost = rate * (secs / 3600),
             itemsSum = 0;
-        
-        $("#items-"+id+" li").each(function(){
-          itemsSum += parseFloat($(this).data("price"))||0;
+            
+        $("#items-" + $t.data("id") + " li").each(function() {
+            itemsSum += parseFloat($(this).data("price")) || 0;
         });
-        
-        $t.find(".timer").text(formatTime(elapsed));
-        $t.find(".total").text("₺"+(baseCost+itemsSum).toFixed(2));
+
+        return {
+            elapsed: elapsed,
+            sessionCost: sessionCost,
+            itemsSum: itemsSum,
+            totalCost: sessionCost + itemsSum
+        };
+      }
+      
+      function updateTimer(id) {
+        let cost = calculateCost("#table-" + id);
+        $("#table-" + id).find(".timer").text(formatTime(cost.elapsed));
+        $("#table-" + id).find(".total").text("₺" + cost.totalCost.toFixed(2));
       }
 
-      // Initialize timers for active tables
-      $(".table-square").each(function(){
-        let $this=$(this), id=$this.data("id");
-        if($this.data("open")){
-          setInterval(()=>updateTimer(id),1000);
-          updateTimer(id); // Initial update
+      // ** YENİ FONKSİYON: Modal içindeki hesap özetini günceller **
+      function updateModalSummary(id){
+        let cost = calculateCost("#table-" + id);
+        $("#modal-timer").text(formatTime(cost.elapsed));
+        $("#modal-session-cost").text("₺" + cost.sessionCost.toFixed(2));
+        $("#modal-items-cost").text("₺" + cost.itemsSum.toFixed(2));
+        $("#modal-total-payable").text("₺" + cost.totalCost.toFixed(2));
+      }
+
+      // Başlangıç sayaçları
+      $(".table-square").each(function() {
+        let id = $(this).data("id");
+        if ($(this).data("open")) {
+          setInterval(() => updateTimer(id), 1000);
         }
       });
 
-      // Double click to start session
-      $(".table-square").dblclick(function(){
-        let $this=$(this), id=$this.data("id");
-        if($this.data("open")) return;
-        
-        let cnt = parseInt(prompt("🎮 Kaç oyuncu oynayacak? (2-4)", "2"));
-        if(!cnt || cnt < 2 || cnt > 4) {
-          alert("⚠️ Geçerli oyuncu sayısı girin (2-4)");
-          return;
-        }
-        
-        $.get("/start/"+id+"/", { controllers: cnt })
-         .done(res=>{
-           if(res.status==="ok"){
-             $this.addClass("active")
-                  .data("open",1)
-                  .data("start", res.start_time)
-                  .data("controllers", res.controllers);
-             $this.find(".dot").removeClass("inactive");
-             setInterval(()=>updateTimer(id),1000);
-             updateTimer(id);
-             
-             // Success animation
-             $this.css('transform', 'scale(1.1)');
-             setTimeout(() => {
-               $this.css('transform', '');
-             }, 300);
-           } else {
-             alert("❌ " + res.message);
-           }
-         })
-         .fail(() => {
-           alert("❌ Bağlantı hatası!");
-         });
+      // Çift tıklama: masa aç
+      $(".table-square").dblclick(function() {
+        let $t = $(this), id = $t.data("id");
+        if ($t.data("open")) return;
+        let cnt = parseInt(prompt("Kaç kol oynanacak?", "2")) || 2;
+        $.get("/start/" + id + "/", { controllers: cnt })
+         .done(res => {
+            if (res.status === "ok") {
+              $t.addClass("active")
+                .data("open", 1)
+                .data("start", res.start_time)
+                .data("controllers", res.controllers)
+                .find('.dot').removeClass('inactive');
+              // Timer'ı hemen başlat
+              setInterval(() => updateTimer(id), 1000);
+              updateTimer(id); // İlk anlık güncelleme için
+            } else alert(res.message);
+          });
       });
 
-      // Single click to open modal
-      $(".table-square").click(function(){
-        let $this=$(this), id=$this.data("id");
-        if(!$this.data("open")) return;
+      // Tek tıklama: modal aç
+      $(".table-square").click(function() {
+        let $t = $(this), id = $t.data("id");
+        if (!$t.data("open")) return;
         
-        $("#session-items-list").html($("#items-"+id).html());
-        $("#modal-overlay").show().data("id", id);
+        // Modal başlığını ve ID'yi ayarla
+        $("#modal-table-name").text($t.data("name"));
+        $("#modal-overlay").data("id", id);
+        
+        // Ürün listesini kopyala
+        $("#session-items-list").html($("#items-" + id).html());
+
+        // Modal'ı göstermeden önce anlık hesaplamayı yap ve göster
+        updateModalSummary(id);
+
+        // Modal'ı göster
+        $("#modal-overlay").css('display', 'flex').delay(10).queue(function(next) {
+            $(this).css('opacity', 1);
+            $("#modal").css('transform', 'scale(1)');
+            next();
+        });
+        
+        // Modal için canlı timer'ı başlat ve interval ID'sini kaydet
+        let modalInterval = setInterval(() => updateModalSummary(id), 1000);
+        $("#modal-overlay").data("timer-interval", modalInterval);
       });
 
-      // Add product
-      $("#add-product-btn").click(function(){
+      // Ürün ekle
+      $("#add-product-btn").click(function() {
         let id = $("#modal-overlay").data("id"),
             opt = $("#product-select option:selected"),
             name = opt.data("name"),
             price = parseFloat(opt.data("price"));
-        
-        $.post("/add/"+id+"/", { product: opt.val() })
-         .done(res=>{
-           if(res.status==="ok"){
-             $(".flash").fadeIn(300).delay(2000).fadeOut(300);
-             $("#session-items-list").append(`<li>${name} – ₺${price.toFixed(2)}</li>`);
-             $("#items-"+id).append(`<li data-price="${price}">${name} – ₺${price.toFixed(2)}</li>`);
-             updateTimer(id);
-             
-             // Success animation
-             $("#add-product-btn").css('transform', 'scale(0.95)');
-             setTimeout(() => {
-               $("#add-product-btn").css('transform', '');
-             }, 150);
-           } else {
-             alert("❌ " + (res.message || "Ürün eklenemedi!"));
-           }
-         })
-         .fail(() => {
-           alert("❌ Bağlantı hatası!");
-         });
+        $.post("/add/" + id + "/", { product: opt.val() })
+         .done(res => {
+            if (res.status === "ok") {
+              $(".flash").fadeIn(200).delay(1500).fadeOut(200);
+              let newItemHTML = `<li data-price="${price.toFixed(2)}">${name} – ₺${price.toFixed(2)}</li>`;
+              $("#session-items-list").append(newItemHTML);
+              $("#items-" + id).append(newItemHTML);
+              // Modal özetini anında güncelle
+              updateModalSummary(id);
+            }
+          });
       });
 
-      // Close session
-      $("#close-session-btn").click(function(e){
+      // Masa kapat
+      $("#close-session-btn").click(function(e) {
         e.preventDefault();
         let id = $("#modal-overlay").data("id");
-        
-        if(!confirm("🚨 Bu masayı kapatmak istediğinizden emin misiniz?")) {
-          return;
-        }
-        
-        $.post("/close/"+id+"/")
-         .done(res=>{
-           let $table = $("#table-"+id);
-           $table.removeClass("active").data("open",0);
-           $table.find(".dot").addClass("inactive");
-           $table.find(".timer").text("--:--:--");
-           $table.find(".total").text("₺0.00");
-           $("#items-"+id).empty();
-           $("#modal-overlay").hide();
-           
-           // Close animation
-           $table.css('transform', 'scale(0.95)');
-           setTimeout(() => {
-             $table.css('transform', '');
-           }, 300);
-         })
-         .fail(() => {
-           alert("❌ Masa kapatılamadı!");
-         });
+        if (!confirm("Masayı kapatmak ve hesabı sıfırlamak istediğinizden emin misiniz?")) return;
+
+        $.post("/close/" + id + "/")
+         .done(res => {
+            // İlgili tüm timer'ları temizle
+            // Bu kısım sunucu tarafında session kapatıldığı için tam olarak çalışmayabilir,
+            // Sayfayı yenilemek en güvenli yöntemdir ama UX için bu şekilde bırakıyoruz.
+            // Daha robust bir çözüm için tüm interval'ları bir array'de tutup ID'ye göre temizlemek gerekir.
+            // Şimdilik sadece sayfayı yenilemeyi öneririz.
+            location.reload(); 
+          });
       });
 
-      // Close modal
-      $("#close-modal-btn, #modal-overlay").click(function(e){
-        if(e.target.id==="close-modal-btn" || e.target.id==="modal-overlay"){
-          $("#modal-overlay").hide();
+      // Modal kapatma
+      $("#close-modal-btn, #modal-overlay").click(function(e) {
+        if (e.target.id === "close-modal-btn" || e.target.id === "modal-overlay") {
+            // Modal timer'ını temizle
+            clearInterval($("#modal-overlay").data("timer-interval"));
+            
+            $("#modal-overlay").css('opacity', 0);
+            $("#modal").css('transform', 'scale(0.95)');
+            setTimeout(() => {
+                $("#modal-overlay").hide();
+            }, 300); // Transition süresi kadar bekle
         }
       });
-
-      // View logs
-      $("#view-logs-btn").click(function(){
+      
+      // Günlük loglar
+      $("#view-logs-btn").click(function() {
         window.open("{% url 'salon:daily_log' %}", "_blank");
       });
-
-      // Keyboard shortcuts
-      $(document).keydown(function(e) {
-        if($("#modal-overlay").is(":visible")) {
-          if(e.key === "Escape") {
-            $("#modal-overlay").hide();
-          } else if(e.key === "Enter" && e.ctrlKey) {
-            $("#add-product-btn").click();
-          }
-        }
-      });
-
-      // Add visual feedback for interactions
-      $(".table-square").on('mousedown', function() {
-        $(this).css('transform', 'scale(0.98)');
-      });
-
-      $(".table-square").on('mouseup mouseleave', function() {
-        if(!$(this).hasClass('active')) {
-          $(this).css('transform', '');
-        }
-      });
-
-      // Enhanced button interactions
-      $(".btn").on('mousedown', function() {
-        $(this).css('transform', 'translateY(-2px) scale(0.98)');
-      });
-
-      $(".btn").on('mouseup mouseleave', function() {
-        $(this).css('transform', 'translateY(-2px)');
-      });
-
     });
   </script>
-    
 </body>
 </html>
