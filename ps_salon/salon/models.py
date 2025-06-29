@@ -29,6 +29,18 @@ class Table(models.Model):
 
     def __str__(self):
         return f"{self.name} ({self.get_ps_type_display()})"
+    
+    @property
+    def current_controllers(self):
+        """Açık olan oturum varsa onun controllers değerini döner, yoksa 2."""
+        if self.is_open:
+            sess = self.session_set.filter(end_time__isnull=True).last()
+            if sess:
+                return sess.controllers
+        return 2
+
+    def __str__(self):
+        return f"{self.name} ({self.get_ps_type_display()})"
 
 
 class Pricing(models.Model):
